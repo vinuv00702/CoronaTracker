@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Corona Tracker</string>
+    <string name="title_global">Global</string>
+    <string name="title_countries">Countries</string>
+    <string name="title_activity_home">Corona Tracker</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_info">Info</string>
 </resources>
