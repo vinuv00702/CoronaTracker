@@ -14,22 +14,35 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.app.coronatracker.R;
 
+import butterknife.BindView;
+
 public class DashboardFragment extends Fragment {
+
+    @BindView(R.id.text_dashboard) TextView dummyTextView;
+
 
     private DashboardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_countries, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+        prepareViewModel();
+        setTextView();
+        return root;
+    }
+
+    // preparing view model for the module
+    private void prepareViewModel(){
+        dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
+    }
+
+    // Setting text from model to TextView
+    private void setTextView(){
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                dummyTextView.setText(s);
             }
         });
-        return root;
     }
 }
