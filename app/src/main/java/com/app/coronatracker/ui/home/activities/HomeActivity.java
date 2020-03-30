@@ -1,22 +1,19 @@
-package com.app.coronatracker.ui.home;
+package com.app.coronatracker.ui.home.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Switch;
-
-import com.app.coronatracker.R;
-import com.app.coronatracker.ui.dashboard.DashboardFragment;
-import com.app.coronatracker.ui.notifications.NotificationsFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+
+import com.app.coronatracker.R;
+import com.app.coronatracker.ui.dashboard.DashboardFragment;
+import com.app.coronatracker.ui.home.HomeFragment;
+import com.app.coronatracker.ui.notifications.NotificationsFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.app.coronatracker.ui.home;
+package com.app.coronatracker.ui.home.model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

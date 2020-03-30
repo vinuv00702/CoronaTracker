@@ -21,6 +21,7 @@ public class DashboardFragment extends Fragment {
     @BindView(R.id.text_dashboard) TextView dummyTextView;
 
 
+
     private DashboardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
