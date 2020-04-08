@@ -1,9 +1,18 @@
 package com.app.coronatracker.ui.home.model;
 
-public class ModelPojo {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Dashboard {
+
+    @SerializedName("cases")
+    @Expose
     private String cases;
+    @SerializedName("deaths")
+    @Expose
     private String deaths;
+    @SerializedName("recovered")
+    @Expose
     private String recovered;
 
 //    getter / setter
