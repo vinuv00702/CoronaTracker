@@ -21,55 +21,47 @@ import com.app.coronatracker.ui.home.viewModel.HomeViewModel;
 
 public class HomeFragment extends Fragment {
 
-//    @BindView(R.id.global_text) TextView sglobal_text;
-//    @BindView(R.id.global_recovered) TextView sglobal_recovered;
-//    @BindView(R.id.global_death) TextView sglobal_death;
-
     public TextView sglobal_text, sglobal_death, sglobal_recovered;
     private View root;
-
-
     private HomeViewModel homeViewModel;
     ProgressDialog progressDialog;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         root = inflater.inflate(R.layout.fragment_home, container, false);
-
-        sglobal_text = (TextView)root.findViewById(R.id.global_text);
-        sglobal_death = (TextView)root.findViewById(R.id.global_death);
-        sglobal_recovered = (TextView)root.findViewById(R.id.global_recovered);
-
+        setUpUI();
+        setUpProgressHud();
         prepareViewModel();
         setTextView();
-//        getJsonData();
-//        startCountAnimation();
         return root;
     }
 
-//    preparing viewModel for the module
+    //preparing viewModel for the module
     private void prepareViewModel(){
-
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
     }
 
-//    setting text from model to TextView
-    private void setTextView(){
+    private void setUpUI(){
+        sglobal_text = (TextView)root.findViewById(R.id.global_text);
+        sglobal_death = (TextView)root.findViewById(R.id.global_death);
+        sglobal_recovered = (TextView)root.findViewById(R.id.global_recovered);
+    }
 
+    private void setUpProgressHud(){
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading..");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
+    }
 
+    //setting text from model to TextView
+    private void setTextView(){
         homeViewModel.init();
         homeViewModel.getDataRepository().observe(getViewLifecycleOwner(), new Observer<Dashboard>() {
             @Override
             public void onChanged(@Nullable Dashboard s) {
-
                 progressDialog.dismiss();
-
                 Log.e(" mainAction", "  cases - "+ s.getCases());
                 sglobal_text.setText(s.getCases());
                 Log.e(" mainAction", "  death - "+ s.getDeaths());
@@ -94,38 +86,4 @@ public class HomeFragment extends Fragment {
         animator.start();
     }
 
-
-
-//    get Json data
-
-//    public void getJsonData(){
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://coronavirus-19-api.herokuapp.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        RetrofitApi service  = retrofit.create(RetrofitApi.class);
-//        Call<Dashboard> call = service.getDashboardData();
-//        call.enqueue(new Callback<Dashboard>() {
-//            @Override
-//            public void onResponse(Call<Dashboard> call, Response<Dashboard> response) {
-//                Log.e(" mainAction", "  response "+ response.body().toString());
-//                Log.e(" mainAction", "  cases - "+ response.body().getCases().toString());
-//                sglobal_text.setText(response.body().getCases().toString());
-//
-//                Log.e(" mainAction", "  cases - "+ response.body().getDeaths().toString());
-//                sglobal_death.setText(response.body().getDeaths().toString());
-//
-//                Log.e(" mainAction", "  cases - "+ response.body().getRecovered().toString());
-//                sglobal_recovered.setText(response.body().getRecovered().toString());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Dashboard> call, Throwable t) {
-//
-//                Log.e("MainActivity ", "  error "+ t.toString());
-//            }
-//        });
-//    }
 }

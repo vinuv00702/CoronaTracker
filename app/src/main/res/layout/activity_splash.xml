@@ -6,18 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.SplashActivity"
-    android:background="@color/selectclr">
+    android:background="@color/clr">
 
-    <ImageView
-        android:id="@+id/splash_image"
-        android:layout_width="269dp"
-        android:layout_height="293dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/global"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/virusloading" />
 
-    </ImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>
