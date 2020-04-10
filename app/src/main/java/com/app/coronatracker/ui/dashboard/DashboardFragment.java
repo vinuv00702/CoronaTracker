@@ -1,6 +1,5 @@
 package com.app.coronatracker.ui.dashboard;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +42,6 @@ public class DashboardFragment extends Fragment {
 //        TextView dummyTextView = (TextView)root.findViewById(R.id.text_country);
 
         prepareViewModel();
-        progressDialog();
         setTextView();
         initialization();
         return root;
@@ -53,20 +51,13 @@ public class DashboardFragment extends Fragment {
         recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
 
         recyclerView.hasFixedSize();
 
         customAdapter = new CustomAdapter(getContext(), countryArrayList);
         recyclerView.setAdapter(customAdapter);
 
-    }
-
-    private void progressDialog() {
-
-        ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading..!!");
-        progressDialog.show();
     }
 
 //     preparing view model for the module

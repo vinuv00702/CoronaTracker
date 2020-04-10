@@ -36,7 +36,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull CustomAdapter.ViewHolder holder, int position) {
 
         Country country = countryArrayList.get(position);
-        holder.text_country.setText(country.getCountry());
+        holder.stext_country.setText(country.getCountry());
 
     }
 
@@ -47,11 +47,11 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView text_country;
+        private final TextView stext_country;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            text_country =(TextView)itemView.findViewById(R.id.text_country);
+            stext_country =(TextView)itemView.findViewById(R.id.text_country);
         }
     }
 }
