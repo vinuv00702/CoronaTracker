@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
     //setting text from model to TextView
     private void setTextView(){
         homeViewModel.init();
-        homeViewModel.getDataRepository().observe(getViewLifecycleOwner(), new Observer<Dashboard>() {
+        homeViewModel.getDashBoardData().observe(getViewLifecycleOwner(), new Observer<Dashboard>() {
             @Override
             public void onChanged(@Nullable Dashboard s) {
                 progressDialog.dismiss();
