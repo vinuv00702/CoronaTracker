@@ -23,6 +23,8 @@ public class HomeFragment extends Fragment {
 
     public TextView sglobal_text, sglobal_death, sglobal_recovered;
     private View root;
+
+
     private HomeViewModel homeViewModel;
     ProgressDialog progressDialog;
 
