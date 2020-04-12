@@ -39,5 +39,7 @@ public class LottieDialogFragment extends DialogFragment {
         super.onActivityCreated(savedInstanceState);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setStyle(DialogFragment.STYLE_NO_FRAME, android.R.style.Theme);
+        getDialog().setCanceledOnTouchOutside(false);
+        getDialog().setCancelable(false);
     }
 }

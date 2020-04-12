@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment  {
 
     private HomeViewModel homeViewModel;
     ProgressDialog progressDialog;
-    LottieDialogFragment  lottirFragments ;
+    LottieDialogFragment  lottieDialogFragment ;
 
 
 
@@ -40,9 +40,7 @@ public class HomeFragment extends Fragment  {
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         setUpUI();
-//        setUpProgressHud();
-//        showProgressDialog();
-        lottirFragments = new LottieDialogFragment().newInstance();
+        lottieDialogFragment = new LottieDialogFragment().newInstance();
         prepareViewModel();
         setTextView();
         return root;
@@ -67,12 +65,12 @@ public class HomeFragment extends Fragment  {
     }
 
     private void showProgressDialog(){
-        lottirFragments.show(getFragmentManager(),"");
+        lottieDialogFragment.show(getFragmentManager(),"");
     }
 
     private void progressDialogDismiss(){
         Toast.makeText(getContext(),"Loaded",Toast.LENGTH_SHORT).show();
-        lottirFragments.dismiss();
+        lottieDialogFragment.dismiss();
 
     }
 

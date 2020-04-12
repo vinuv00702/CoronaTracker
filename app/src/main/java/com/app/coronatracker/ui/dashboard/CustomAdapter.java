@@ -37,8 +37,13 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
         Country country = countryArrayList.get(position);
         holder.stext_country.setText(country.getCountry());
-
-
+        holder.scaSes.setText("Cases: "+country.getCases());
+        holder.stodayCases.setText("Today Cases: "+country.getTodayCases());
+        holder.sdeAth.setText("Death: "+country.getDeath());
+//        holder.stodayDeath.setText("Today Death: "+country.getTodayDeath());
+        holder.srecoVered.setText("Recovered: "+country.getRecovered());
+        holder.sacTive.setText("Active: "+country.getActive());
+        holder.scriTical.setText("Critical: "+country.getCritical());
     }
 
     @Override
@@ -48,11 +53,18 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView stext_country;
+        private  TextView stext_country, scaSes, stodayCases, sdeAth, stodayDeath,
+                                                        srecoVered, sacTive, scriTical;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             stext_country =(TextView)itemView.findViewById(R.id.text_country);
+            scaSes =(TextView)itemView.findViewById(R.id.text_cases);
+            stodayCases =(TextView)itemView.findViewById(R.id.text_todayCases);
+            sdeAth =(TextView)itemView.findViewById(R.id.text_death);
+            stodayDeath =(TextView)itemView.findViewById(R.id.text_todayDeath);
+            srecoVered =(TextView)itemView.findViewById(R.id.text_recovered);
+            sacTive =(TextView)itemView.findViewById(R.id.text_active);
+            scriTical =(TextView)itemView.findViewById(R.id.text_critical);
         }
     }
 }
