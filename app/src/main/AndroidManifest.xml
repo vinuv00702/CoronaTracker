@@ -20,8 +20,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/CustomTheme"
             android:name=".ui.home.activities.HomeActivity"
             android:label="@string/title_activity_home"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

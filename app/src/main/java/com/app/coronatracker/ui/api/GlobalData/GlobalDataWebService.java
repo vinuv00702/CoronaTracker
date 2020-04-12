@@ -1,36 +1,45 @@
-package com.app.coronatracker.ui.api;
+package com.app.coronatracker.ui.api.GlobalData;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.app.coronatracker.ui.api.APIConstant;
 import com.app.coronatracker.ui.dashboard.model.Country;
 import com.app.coronatracker.ui.home.model.Dashboard;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DataRepository {
-    private static DataRepository dataRepository;
 
-    public static DataRepository getInstance(){
+public class GlobalDataWebService implements GlobalDataWebInterface {
+
+    private static GlobalDataWebService dataRepository;
+    private GlobalDataApi globalDataApi;
+    private static Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(APIConstant.herokuBaseURL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    public GlobalDataWebService(){
+        globalDataApi = retrofit.create(GlobalDataApi.class);
+    }
+
+    // Singleton instance
+    public static GlobalDataWebService getInstance(){
         if (dataRepository == null){
-            dataRepository = new DataRepository();
+            dataRepository = new GlobalDataWebService();
         }
         return dataRepository;
     }
 
-    private com.app.coronatracker.ui.api.RetrofitApi retrofitApi;
 
-    public DataRepository(){
-        retrofitApi = com.app.coronatracker.ui.api.RetrofitService.createService
-                (com.app.coronatracker.ui.api.RetrofitApi.class);
-    }
-
-    public MutableLiveData<Dashboard> getData(){
+    public MutableLiveData<Dashboard> getGlobalData(){
 
         final MutableLiveData<Dashboard> liveData = new MutableLiveData<>();
 
-        retrofitApi.getDashboardData().enqueue(new Callback<Dashboard>() {
+        globalDataApi.getDashboardData().enqueue(new Callback<Dashboard>() {
             @Override
             public void onResponse(Call<Dashboard> call, Response<Dashboard> response) {
 
@@ -52,7 +61,7 @@ public class DataRepository {
 
         final MutableLiveData<Country> liveData = new MutableLiveData<>();
 
-        retrofitApi.getCountriesData().enqueue(new Callback<Country>() {
+        globalDataApi.getCountriesData().enqueue(new Callback<Country>() {
             @Override
             public void onResponse(Call<Country> call, Response<Country> response) {
 

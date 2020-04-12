@@ -64,7 +64,7 @@ public class DashboardFragment extends Fragment {
     // Setting text from model to TextView
     private void setTextView(){
         dashboardViewModel.init();
-        dashboardViewModel.getDataRepository().observe(getViewLifecycleOwner(), new Observer<Country>() {
+        dashboardViewModel.getGlobalDataRepository().observe(getViewLifecycleOwner(), new Observer<Country>() {
             @Override
             public void onChanged(@Nullable Country s) {
 //                dummyTextView.setText(s);

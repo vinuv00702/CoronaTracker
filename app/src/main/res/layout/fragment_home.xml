@@ -4,59 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
-    android:background="#5D5B5B">
+    android:background="@color/colorSecondary"
+    tools:context=".ui.home.HomeFragment">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="284dp"
-        android:layout_height="143dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="26dp"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/cardBackground"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center">
+            android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="43dp"
-                android:layout_marginLeft="43dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="Cases"
-                android:textColor="#2F78E6"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25dp"
-                android:textStyle="bold">
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/global_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </TextView>
 
             <TextView
                 android:id="@+id/global_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
 
-                android:layout_marginTop="58dp"
-                android:layout_marginEnd="34dp"
-                android:layout_marginRight="34dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="0000000"
-                android:textColor="#111"
-                android:textSize="50dp" />
-        </RelativeLayout>
+                android:textAlignment="textStart"
+                android:textColor="@color/clr"
+                android:textSize="50dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
@@ -64,84 +70,90 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="278dp"
-        android:layout_height="309dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginLeft="61dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginRight="61dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/cardBackground"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:paddingRight="40dp"
-            android:paddingLeft="40dp">
+            android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="22dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Recovered"
-                android:textColor="#30BC11"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25dp"
-                android:textStyle="bold">
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/global_recovered"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </TextView>
 
             <TextView
                 android:id="@+id/global_recovered"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="65dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="0000000"
+                android:textColor="@color/clr"
                 android:textSize="50dp"
-                android:textColor="#111">
+                app:layout_constraintBottom_toTopOf="@+id/textView4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             </TextView>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
 
-                android:layout_marginTop="159dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Death"
-                android:textColor="#E31212"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25dp"
-                android:textStyle="bold">
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/global_death"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/global_recovered">
 
             </TextView>
 
             <TextView
                 android:id="@+id/global_death"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="204dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
                 android:text="0000000"
-                android:textColor="#ED0808"
-                android:textSize="50dp">
+                android:textColor="@color/clr"
+                android:textSize="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             </TextView>
-
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

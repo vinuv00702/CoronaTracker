@@ -4,23 +4,25 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.app.coronatracker.ui.api.DataRepository;
+import com.app.coronatracker.ui.Repository.GlobalDataRepository;
+import com.app.coronatracker.ui.Repository.GlobalDataService;
+import com.app.coronatracker.ui.api.GlobalData.GlobalDataWebService;
 import com.app.coronatracker.ui.dashboard.model.Country;
 
 public class DashboardViewModel extends ViewModel {
 
     private MutableLiveData<Country> mutableLiveData;
-    private DataRepository dataRepository;
+    private GlobalDataRepository globalDataRepository;
 
     public void init(){
         if (mutableLiveData != null){
             return;
         }
-        dataRepository = DataRepository.getInstance();
-        mutableLiveData = dataRepository.getCountriesData();
+        globalDataRepository = new GlobalDataService( GlobalDataWebService.getInstance() );
+        mutableLiveData = globalDataRepository.getCountriesData();
     }
 
-    public LiveData<Country> getDataRepository() {
+    public LiveData<Country> getGlobalDataRepository() {
         return mutableLiveData;
     }
 }

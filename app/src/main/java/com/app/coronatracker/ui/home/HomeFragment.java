@@ -18,12 +18,17 @@ import androidx.lifecycle.ViewModelProviders;
 import com.app.coronatracker.R;
 import com.app.coronatracker.ui.LottieDialogFragment;
 import com.app.coronatracker.ui.home.model.Dashboard;
+import com.app.coronatracker.ui.home.model.State;
 import com.app.coronatracker.ui.home.viewModel.HomeViewModel;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
     public TextView sglobal_text, sglobal_death, sglobal_recovered;
     private View root;
+
+
     private HomeViewModel homeViewModel;
     ProgressDialog progressDialog;
 
@@ -75,7 +80,7 @@ public class HomeFragment extends Fragment {
     private void setTextView(){
         showProgressDialog();
         homeViewModel.init();
-        homeViewModel.getDataRepository().observe(getViewLifecycleOwner(), new Observer<Dashboard>() {
+        homeViewModel.getDashBoardData().observe(getViewLifecycleOwner(), new Observer<Dashboard>() {
             @Override
             public void onChanged(@Nullable Dashboard s) {
 
@@ -86,6 +91,12 @@ public class HomeFragment extends Fragment {
                 sglobal_death.setText(s.getDeaths());
                 Log.e(" mainAction", "  recovered - "+ s.getRecovered());
                 sglobal_recovered.setText(s.getRecovered());
+            }
+        });
+        homeViewModel.getStates().observe(getViewLifecycleOwner(), new Observer<ArrayList<State>>() {
+            @Override
+            public void onChanged(ArrayList<State> states) {
+                Log.e(" mainAction", "  states - "+ states);
             }
         });
     }

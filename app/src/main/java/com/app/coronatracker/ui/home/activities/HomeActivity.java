@@ -24,7 +24,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         loadFragment (new HomeFragment());
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
