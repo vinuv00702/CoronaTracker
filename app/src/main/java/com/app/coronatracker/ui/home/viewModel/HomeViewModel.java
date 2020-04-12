@@ -54,4 +54,9 @@ public class HomeViewModel extends ViewModel {
     public LiveData<Dashboard> getDashBoardData() {
         return mutableLiveData;
     }
+
+    public LiveData<ArrayList<State>> getStates(){
+        return indianStatesData;
+    }
+
 }
