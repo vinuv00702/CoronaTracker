@@ -38,6 +38,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
         Country country = countryArrayList.get(position);
         holder.stext_country.setText(country.getCountry());
 
+
     }
 
     @Override

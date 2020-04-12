@@ -39,8 +39,6 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_countries, container, false);
 
-//        TextView dummyTextView = (TextView)root.findViewById(R.id.text_country);
-
         prepareViewModel();
         setTextView();
         initialization();
@@ -52,9 +50,7 @@ public class DashboardFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-
         recyclerView.hasFixedSize();
-
         customAdapter = new CustomAdapter(getContext(), countryArrayList);
         recyclerView.setAdapter(customAdapter);
 
@@ -72,7 +68,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Country s) {
 //                dummyTextView.setText(s);
-                stext_country.setText(s.getCountry());
+//                stext_country.setText(s.getCountry());
 
             }
         });

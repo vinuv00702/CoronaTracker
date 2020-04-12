@@ -1,6 +1,5 @@
 package com.app.coronatracker.ui.home;
 
-import android.animation.ValueAnimator;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.app.coronatracker.R;
+import com.app.coronatracker.ui.LottieDialogFragment;
 import com.app.coronatracker.ui.home.model.Dashboard;
 import com.app.coronatracker.ui.home.viewModel.HomeViewModel;
 
@@ -27,11 +28,14 @@ public class HomeFragment extends Fragment {
     ProgressDialog progressDialog;
 
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         setUpUI();
-        setUpProgressHud();
+//        setUpProgressHud();
+//        showProgressDialog();
         prepareViewModel();
         setTextView();
         return root;
@@ -55,13 +59,27 @@ public class HomeFragment extends Fragment {
         progressDialog.show();
     }
 
+    private void showProgressDialog(){
+        new LottieDialogFragment().newInstance().
+                show(getFragmentManager(),"");
+    }
+
+    private void progressDialogDismiss(){
+        Toast.makeText(getContext(),"Loaded",Toast.LENGTH_SHORT).show();
+
+
+    }
+
+
     //setting text from model to TextView
     private void setTextView(){
+        showProgressDialog();
         homeViewModel.init();
         homeViewModel.getDataRepository().observe(getViewLifecycleOwner(), new Observer<Dashboard>() {
             @Override
             public void onChanged(@Nullable Dashboard s) {
-                progressDialog.dismiss();
+
+                progressDialogDismiss();
                 Log.e(" mainAction", "  cases - "+ s.getCases());
                 sglobal_text.setText(s.getCases());
                 Log.e(" mainAction", "  death - "+ s.getDeaths());
@@ -72,18 +90,5 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void startCountAnimation() {
-        ValueAnimator animator = ValueAnimator.ofInt(9999999, 0);
-        animator.setDuration(2000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            public void onAnimationUpdate(ValueAnimator animation) {
-                sglobal_text.setText(animation.getAnimatedValue().toString());
-                sglobal_death.setText(animation.getAnimatedValue().toString());
-                sglobal_recovered.setText(animation.getAnimatedValue().toString());
-
-            }
-        });
-        animator.start();
-    }
 
 }
