@@ -6,6 +6,8 @@ import com.app.coronatracker.ui.api.APIConstant;
 import com.app.coronatracker.ui.dashboard.model.Country;
 import com.app.coronatracker.ui.home.model.Dashboard;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,13 +59,13 @@ public class GlobalDataWebService implements GlobalDataWebInterface {
         return liveData;
     }
 
-    public MutableLiveData<Country> getCountriesData(){
+    public MutableLiveData<ArrayList<Country>> getCountriesData(){
 
-        final MutableLiveData<Country> liveData = new MutableLiveData<>();
+        final MutableLiveData<ArrayList<Country>> liveData = new MutableLiveData<>();
 
-        globalDataApi.getCountriesData().enqueue(new Callback<Country>() {
+        globalDataApi.getCountriesData().enqueue(new Callback<ArrayList<Country>>() {
             @Override
-            public void onResponse(Call<Country> call, Response<Country> response) {
+            public void onResponse(Call<ArrayList<Country>> call, Response<ArrayList<Country>> response) {
 
                 if (response.isSuccessful()){
                     liveData.setValue(response.body());
@@ -71,7 +73,7 @@ public class GlobalDataWebService implements GlobalDataWebInterface {
             }
 
             @Override
-            public void onFailure(Call<Country> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Country>> call, Throwable t) {
 
                 liveData.setValue(null);
             }

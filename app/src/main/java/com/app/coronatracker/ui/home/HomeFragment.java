@@ -23,7 +23,7 @@ import com.app.coronatracker.ui.home.viewModel.HomeViewModel;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  {
 
     public TextView sglobal_text, sglobal_death, sglobal_recovered;
     private View root;
@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     ProgressDialog progressDialog;
+    LottieDialogFragment  lottirFragments ;
 
 
 
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
         setUpUI();
 //        setUpProgressHud();
 //        showProgressDialog();
+        lottirFragments = new LottieDialogFragment().newInstance();
         prepareViewModel();
         setTextView();
         return root;
@@ -65,13 +67,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void showProgressDialog(){
-        new LottieDialogFragment().newInstance().
-                show(getFragmentManager(),"");
+        lottirFragments.show(getFragmentManager(),"");
     }
 
     private void progressDialogDismiss(){
         Toast.makeText(getContext(),"Loaded",Toast.LENGTH_SHORT).show();
-
+        lottirFragments.dismiss();
 
     }
 

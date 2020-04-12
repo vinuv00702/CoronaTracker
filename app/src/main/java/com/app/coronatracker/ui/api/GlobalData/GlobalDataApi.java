@@ -3,6 +3,8 @@ package com.app.coronatracker.ui.api.GlobalData;
 import com.app.coronatracker.ui.dashboard.model.Country;
 import com.app.coronatracker.ui.home.model.Dashboard;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -11,5 +13,5 @@ public interface GlobalDataApi {
     Call<Dashboard> getDashboardData();
 
     @GET("countries")
-    Call<Country> getCountriesData();
+    Call<ArrayList<Country>> getCountriesData();
 }

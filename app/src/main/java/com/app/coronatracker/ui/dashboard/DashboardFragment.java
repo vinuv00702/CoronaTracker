@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -64,11 +63,9 @@ public class DashboardFragment extends Fragment {
     // Setting text from model to TextView
     private void setTextView(){
         dashboardViewModel.init();
-        dashboardViewModel.getGlobalDataRepository().observe(getViewLifecycleOwner(), new Observer<Country>() {
+        dashboardViewModel.getGlobalDataRepository().observe(getViewLifecycleOwner(), new Observer<ArrayList<Country>>() {
             @Override
-            public void onChanged(@Nullable Country s) {
-//                dummyTextView.setText(s);
-//                stext_country.setText(s.getCountry());
+            public void onChanged(ArrayList<Country> countryArrayList) {
 
             }
         });

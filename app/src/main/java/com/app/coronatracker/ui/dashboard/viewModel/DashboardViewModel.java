@@ -9,9 +9,11 @@ import com.app.coronatracker.ui.Repository.GlobalDataService;
 import com.app.coronatracker.ui.api.GlobalData.GlobalDataWebService;
 import com.app.coronatracker.ui.dashboard.model.Country;
 
+import java.util.ArrayList;
+
 public class DashboardViewModel extends ViewModel {
 
-    private MutableLiveData<Country> mutableLiveData;
+    private MutableLiveData<ArrayList<Country>> mutableLiveData;
     private GlobalDataRepository globalDataRepository;
 
     public void init(){
@@ -22,7 +24,7 @@ public class DashboardViewModel extends ViewModel {
         mutableLiveData = globalDataRepository.getCountriesData();
     }
 
-    public LiveData<Country> getGlobalDataRepository() {
+    public LiveData<ArrayList<Country>> getGlobalDataRepository() {
         return mutableLiveData;
     }
 }
