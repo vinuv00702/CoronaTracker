@@ -10,10 +10,10 @@ public class Country {
     private String cases;
     @SerializedName("todayCases")
     private String todayCases;
-    @SerializedName("death")
-    private String death;
-    @SerializedName("todayDeath")
-    private String todayDeath;
+    @SerializedName("deaths")
+    private String deaths;
+    @SerializedName("todayDeaths")
+    private String todayDeaths;
     @SerializedName("recovered")
     private String recovered;
     @SerializedName("active")
@@ -21,13 +21,13 @@ public class Country {
     @SerializedName("critical")
     private String critical;
 
-    public Country(String country, String cases, String todayCases, String death,
-                   String todayDeath, String recovered, String active, String critical){
+    public Country(String country, String cases, String todayCases, String deaths,
+                   String todayDeaths, String recovered, String active, String critical){
         this.country = country;
         this.cases = cases;
         this.todayCases = todayCases;
-        this.death = death;
-        this.todayDeath = todayDeath;
+        this.deaths = deaths;
+        this.todayDeaths = todayDeaths;
         this.recovered = recovered;
         this.active = active;
         this.critical = critical;
@@ -35,59 +35,68 @@ public class Country {
 
 //    getter/setter
 
-    public String getCountry(){
+
+    public String getCountry() {
         return country;
     }
-    public void setCountry(String mCountry){
-        this.country = mCountry;
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getCases(){
+    public String getCases() {
         return cases;
     }
-    public void setCases(String mCases){
-        this.cases = mCases;
+
+    public void setCases(String cases) {
+        this.cases = cases;
     }
 
-    public String getTodayCases(){
+    public String getTodayCases() {
         return todayCases;
     }
-    public void setTodayCases(String mTodayCases){
-        this.todayCases = mTodayCases;
+
+    public void setTodayCases(String todayCases) {
+        this.todayCases = todayCases;
     }
 
-    public String getDeath(){
-        return death;
-    }
-    public void setDeath(String mDeath){
-        this.death = mDeath;
+    public String getDeaths() {
+        return deaths;
     }
 
-    public String getTodayDeath(){
-        return getTodayDeath();
-    }
-    public void setTodayDeath(String mTodayDeath){
-        this.todayDeath = mTodayDeath;
+    public void setDeaths(String deaths) {
+        this.deaths = deaths;
     }
 
-    public String getRecovered(){
+    public String getTodayDeaths() {
+        return todayDeaths;
+    }
+
+    public void setTodayDeath(String todayDeath) {
+        this.todayDeaths = todayDeath;
+    }
+
+    public String getRecovered() {
         return recovered;
     }
-    public void setRecovered(String mRecovered){
-        this.recovered = mRecovered;
+
+    public void setRecovered(String recovered) {
+        this.recovered = recovered;
     }
 
-    public String getActive(){
+    public String getActive() {
         return active;
     }
-    public void setActive(String mActive){
-        this.active = mActive;
+
+    public void setActive(String active) {
+        this.active = active;
     }
 
-    public String getCritical(){
+    public String getCritical() {
         return critical;
     }
-    public void setCritical(String mCritical){
-        this.critical = mCritical;
+
+    public void setCritical(String critical) {
+        this.critical = critical;
     }
 }
