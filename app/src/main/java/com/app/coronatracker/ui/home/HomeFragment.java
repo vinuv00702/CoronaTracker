@@ -20,16 +20,20 @@ import com.app.coronatracker.ui.LottieDialogFragment;
 import com.app.coronatracker.ui.home.model.Dashboard;
 import com.app.coronatracker.ui.home.viewModel.HomeViewModel;
 
+import org.angmarch.views.NiceSpinner;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class HomeFragment extends Fragment  {
 
-    public TextView sglobal_text, sglobal_death, sglobal_recovered;
+    private TextView sglobal_text, sglobal_death, sglobal_recovered;
     private View root;
-
+    private NiceSpinner niceSpinner;
     private HomeViewModel homeViewModel;
-    ProgressDialog progressDialog;
-    LottieDialogFragment  lottieDialogFragment ;
+    private LottieDialogFragment  lottieDialogFragment ;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,27 +52,18 @@ public class HomeFragment extends Fragment  {
     }
 
     private void setUpUI(){
+        niceSpinner = (NiceSpinner) root.findViewById(R.id.state_spinner);
         sglobal_text = (TextView)root.findViewById(R.id.global_text);
         sglobal_death = (TextView)root.findViewById(R.id.global_death);
         sglobal_recovered = (TextView)root.findViewById(R.id.global_recovered);
     }
 
-    private void setUpProgressHud(){
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading..");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-    }
 
     private void showProgressDialog(){
         lottieDialogFragment.show(getFragmentManager(),"");
     }
 
-    private void progressDialogDismiss(){
-        Toast.makeText(getContext(),"Loaded",Toast.LENGTH_SHORT).show();
-        lottieDialogFragment.dismiss();
-
-    }
+    private void progressDialogDismiss(){ lottieDialogFragment.dismiss(); }
 
     //Observe changes on viewmodel
     private void observeViewModel(){
@@ -98,11 +93,18 @@ public class HomeFragment extends Fragment  {
         homeViewModel.getStates().observe(getViewLifecycleOwner(), new Observer<ArrayList<HomeViewModel.IndianStateModel>>() {
             @Override
             public void onChanged(ArrayList<HomeViewModel.IndianStateModel> indianStateModels) {
-                for (HomeViewModel.IndianStateModel st : indianStateModels){
-                    Log.e(" mainAction", "  states - "+ st.getName());
-                }
+                populatePicker(indianStateModels);
             }
         });
+    }
+
+    private void populatePicker(ArrayList<HomeViewModel.IndianStateModel> indianStateModels){
+        List<String> dataSet = new LinkedList<>();
+        for (HomeViewModel.IndianStateModel st : indianStateModels){
+            Log.e(" mainAction", "  states - "+ st.getName());
+            dataSet.add(st.getName());
+        }
+        niceSpinner.attachDataSource(dataSet);
     }
 
 
