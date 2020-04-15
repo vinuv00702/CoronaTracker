@@ -2,6 +2,7 @@ package com.app.coronatracker.ui.home.viewModel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.app.coronatracker.ui.Repository.GlobalDataRepository;
@@ -17,8 +18,22 @@ import java.util.ArrayList;
 
 public class HomeViewModel extends ViewModel {
 
+
+    public class IndianStateModel {
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+
     private MutableLiveData<Dashboard> mutableLiveData;
-    private MutableLiveData<ArrayList<State>> indianStatesData;
+    private MutableLiveData<ArrayList<IndianStateModel>> indianStatesLiveData;
 
     //Repositories
     private GlobalDataRepository globalDataRepository;
@@ -35,7 +50,8 @@ public class HomeViewModel extends ViewModel {
         indianDataRepository = getIndianStatesDataRepository();
 
         // Prepare live data
-        setupLiveData();
+        observerGlobalDataRepository();
+        observeIndianStatesRepository();
     }
 
     private GlobalDataRepository getGlobalDataRepository(){
@@ -46,17 +62,34 @@ public class HomeViewModel extends ViewModel {
         return new IndianStatesDataService(IndianDataWebService.getInstance() );
     }
 
-    private void setupLiveData(){
+    private void observerGlobalDataRepository(){
         mutableLiveData = globalDataRepository.getGlobalData();
-        indianStatesData = indianDataRepository.getStates();
+    }
+
+    private void observeIndianStatesRepository(){
+        indianStatesLiveData = new MutableLiveData<ArrayList<IndianStateModel>>();
+        ArrayList<IndianStateModel> indianStateModels = new ArrayList<IndianStateModel>();
+        indianDataRepository.getStates().observeForever(new Observer<ArrayList<State>>() {
+            @Override
+            public void onChanged(ArrayList<State> states) {
+                for (State state : states)
+                {
+                    // Extract states name from liveData
+                    IndianStateModel _indianStateModelModel = new IndianStateModel();
+                    _indianStateModelModel.setName(state.getName());
+                    indianStateModels.add(_indianStateModelModel);
+                    indianStatesLiveData.setValue(indianStateModels);
+                }
+            }
+        });
     }
 
     public LiveData<Dashboard> getDashBoardData() {
         return mutableLiveData;
     }
 
-    public LiveData<ArrayList<State>> getStates(){
-        return indianStatesData;
-    }
+    public LiveData<ArrayList<IndianStateModel>> getStates(){ return indianStatesLiveData; }
+
+
 
 }
