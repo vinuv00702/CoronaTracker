@@ -52,7 +52,7 @@ public class IndianDataWebService implements IndianDataWebInterface {
 
             @Override
             public void onFailure(Call<ArrayList<State>> call, Throwable t) {
-                liveData.setValue(null);
+                //liveData.setValue(null);
             }
         });
 

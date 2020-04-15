@@ -79,7 +79,9 @@ public class HomeViewModel extends ViewModel {
                     _indianStateModelModel.setName(state.getName());
                     indianStateModels.add(_indianStateModelModel);
                 }
-                indianStatesLiveData.setValue(indianStateModels);
+                if (indianStateModels.size() > 0){
+                    indianStatesLiveData.setValue(indianStateModels);
+                }
             }
         });
     }
