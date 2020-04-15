@@ -1,11 +1,14 @@
 package com.app.coronatracker.ui.home;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,12 @@ import com.app.coronatracker.R;
 import com.app.coronatracker.ui.LottieDialogFragment;
 import com.app.coronatracker.ui.home.model.Dashboard;
 import com.app.coronatracker.ui.home.viewModel.HomeViewModel;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.angmarch.views.NiceSpinner;
 
@@ -34,6 +43,8 @@ public class HomeFragment extends Fragment  {
     private NiceSpinner niceSpinner;
     private HomeViewModel homeViewModel;
     private LottieDialogFragment  lottieDialogFragment ;
+    private PieChart pieChart;
+    Spinner spinner;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,7 +54,45 @@ public class HomeFragment extends Fragment  {
         lottieDialogFragment = new LottieDialogFragment().newInstance();
         prepareViewModel();
         observeViewModel();
+        setPieChart();
         return root;
+    }
+
+    private void setPieChart() {
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5,10,5,5);
+
+        pieChart.setDragDecelerationFrictionCoef(0.99f);
+
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.GRAY);
+        pieChart.setHoleRadius(30f);
+        pieChart.setTransparentCircleRadius(40f);
+
+        chartData();
+    }
+
+    private void chartData() {
+        ArrayList<PieEntry> yValues = new ArrayList<>();
+
+        yValues.add(new PieEntry(2011978,"Cases"));
+        yValues.add(new PieEntry(489626,"Recovered"));
+        yValues.add(new PieEntry(127492,"Deaths"));
+        yValues.add(new PieEntry(51571,"Critical"));
+
+        pieChart.animateY(1000, Easing.EaseInOutQuad);
+
+        PieDataSet dataSet = new PieDataSet(yValues,"Corona Live Data");
+        dataSet.setSliceSpace(2f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+
+        PieData pieData = new PieData((dataSet));
+        pieData.setValueTextSize(10f);
+        pieData.setValueTextColor(Color.BLACK);
+
+        pieChart.setData(pieData);
     }
 
     //preparing viewModel for the module
@@ -53,6 +102,8 @@ public class HomeFragment extends Fragment  {
 
     private void setUpUI(){
         niceSpinner = (NiceSpinner) root.findViewById(R.id.state_spinner);
+        spinner =(Spinner)root.findViewById(R.id.state_spinner2);
+        pieChart = (PieChart)root.findViewById(R.id.chart);
         sglobal_text = (TextView)root.findViewById(R.id.global_text);
         sglobal_death = (TextView)root.findViewById(R.id.global_death);
         sglobal_recovered = (TextView)root.findViewById(R.id.global_recovered);
@@ -104,6 +155,9 @@ public class HomeFragment extends Fragment  {
             Log.e(" mainAction", "  states - "+ st.getName());
             dataSet.add(st.getName());
         }
+        ArrayAdapter adapter = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,dataSet);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         niceSpinner.attachDataSource(dataSet);
     }
 

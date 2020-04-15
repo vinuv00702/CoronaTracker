@@ -1,6 +1,8 @@
 package com.app.coronatracker.ui.api.IndianData;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.app.coronatracker.ui.api.APIConstant;
@@ -47,12 +49,14 @@ public class IndianDataWebService implements IndianDataWebInterface {
             public void onResponse(Call<ArrayList<State>> call, Response<ArrayList<State>> response) {
                 if(response.isSuccessful()){
                     liveData.setValue(response.body());
+                    Log.e("action","response"+response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<State>> call, Throwable t) {
-                //liveData.setValue(null);
+                liveData.setValue(null);
+                Log.e("API","error-"+t.getLocalizedMessage());
             }
         });
 

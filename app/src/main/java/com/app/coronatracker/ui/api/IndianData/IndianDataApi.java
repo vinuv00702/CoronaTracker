@@ -17,7 +17,7 @@ public interface IndianDataApi {
            "x-rapidapi-host:"+ APIConstant.CORONATRACKER_HOST,
             "x-rapidapi-key:"+ APIConstant.CORONATRACKER_API_KEY
     })
-    @GET("getStatewise")
+    @GET("getStateWise")
     Call<ArrayList<State>> getStateWise();
 
 }

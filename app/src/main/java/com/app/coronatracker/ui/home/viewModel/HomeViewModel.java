@@ -90,8 +90,8 @@ public class HomeViewModel extends ViewModel {
         return mutableLiveData;
     }
 
-    public LiveData<ArrayList<IndianStateModel>> getStates(){ return indianStatesLiveData; }
-
-
+    public LiveData<ArrayList<IndianStateModel>> getStates(){
+        return indianStatesLiveData;
+    }
 
 }

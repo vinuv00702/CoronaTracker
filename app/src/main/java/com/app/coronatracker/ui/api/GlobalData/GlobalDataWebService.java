@@ -53,7 +53,7 @@ public class GlobalDataWebService implements GlobalDataWebInterface {
             @Override
             public void onFailure(Call<Dashboard> call, Throwable t) {
 
-                liveData.setValue(null);
+//                liveData.setValue(null);
             }
         });
         return liveData;
