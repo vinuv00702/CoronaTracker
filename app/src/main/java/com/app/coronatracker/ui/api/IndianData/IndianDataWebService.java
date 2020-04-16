@@ -6,9 +6,11 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.app.coronatracker.ui.api.APIConstant;
-import com.app.coronatracker.ui.api.GlobalData.GlobalDataWebService;
-import com.app.coronatracker.ui.home.model.Dashboard;
+import com.app.coronatracker.ui.api.utils.APIError;
+import com.app.coronatracker.ui.api.utils.CTError;
 import com.app.coronatracker.ui.home.model.State;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,47 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class IndianDataWebService implements IndianDataWebInterface {
 
+    public class Result{
+        @SerializedName("status")
+        @Expose
+        private String status;
+
+        @SerializedName("statusCode")
+        @Expose
+        private String statusCode;
+
+        @SerializedName("response")
+        @Expose
+        private ArrayList<State> states;
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getStatusCode() {
+            return statusCode;
+        }
+
+        public void setStatusCode(String statusCode) {
+            this.statusCode = statusCode;
+        }
+
+        public ArrayList<State> getStates() {
+            return states;
+        }
+
+        public void setStates(ArrayList<State> states) {
+            this.states = states;
+        }
+    }
+
+
     IndianDataApi indianDataApi;
+    MutableLiveData<CTError> apiError;
     public static  IndianDataWebService indianDataWebService;
     private static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(APIConstant.coronaTrackerBaseURL)
@@ -28,6 +70,7 @@ public class IndianDataWebService implements IndianDataWebInterface {
             .build();
 
     public IndianDataWebService(){
+        apiError = new MutableLiveData<>();
         indianDataApi = retrofit.create(IndianDataApi.class);
     }
 
@@ -44,22 +87,36 @@ public class IndianDataWebService implements IndianDataWebInterface {
 
         final MutableLiveData<ArrayList<State>> liveData = new MutableLiveData<>();
 
-        indianDataApi.getStateWise().enqueue(new Callback<ArrayList<State>>() {
+
+        indianDataApi.getStateWise().enqueue(new Callback<IndianDataWebService.Result>() {
             @Override
-            public void onResponse(Call<ArrayList<State>> call, Response<ArrayList<State>> response) {
+            public void onResponse(Call<IndianDataWebService.Result> call, Response<IndianDataWebService.Result> response) {
                 if(response.isSuccessful()){
-                    liveData.setValue(response.body());
-                    Log.e("action","response"+response.body());
+                    ArrayList<State> states =  response.body().getStates();
+                    liveData.setValue(states);
+                }else {
+                    APIError _apiError = new APIError();
+                    _apiError.setCode(response.code());
+                    _apiError.setMessage(response.message());
+                    apiError.setValue(_apiError);
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<State>> call, Throwable t) {
-                liveData.setValue(null);
-                Log.e("API","error-"+t.getLocalizedMessage());
+            public void onFailure(Call<IndianDataWebService.Result> call, Throwable t) {
+                APIError _apiError = new APIError();
+                _apiError.setCode(-1000);
+                _apiError.setMessage(t.getLocalizedMessage());
+                apiError.setValue(_apiError);
             }
+
         });
 
         return liveData;
+    }
+
+    @Override
+    public MutableLiveData<CTError> onError() {
+        return apiError;
     }
 }

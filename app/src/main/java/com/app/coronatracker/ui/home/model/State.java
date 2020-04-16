@@ -5,17 +5,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class State {
 
+
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    @SerializedName("value")
+    @Expose
+    private Integer value;
+
+    @SerializedName("active")
+    @Expose
+    private Integer active;
 
     @SerializedName("name")
     @Expose
     private String name;
 
-    @SerializedName("cases")
+    @SerializedName("confirmed")
     @Expose
-    private String cases;
+    private String confirmed;
 
     @SerializedName("recovered")
     @Expose
@@ -25,12 +34,29 @@ public class State {
     @Expose
     private String deaths;
 
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
     }
 
     public String getName() {
@@ -41,12 +67,12 @@ public class State {
         this.name = name;
     }
 
-    public String getCases() {
-        return cases;
+    public String getConfirmed() {
+        return confirmed;
     }
 
-    public void setCases(String cases) {
-        this.cases = cases;
+    public void setConfirmed(String confirmed) {
+        this.confirmed = confirmed;
     }
 
     public String getRecovered() {

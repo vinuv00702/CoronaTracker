@@ -1,5 +1,7 @@
 package com.app.coronatracker.ui.home.viewModel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -11,6 +13,7 @@ import com.app.coronatracker.ui.Repository.IndianStatesDataRepository;
 import com.app.coronatracker.ui.Repository.IndianStatesDataService;
 import com.app.coronatracker.ui.api.GlobalData.GlobalDataWebService;
 import com.app.coronatracker.ui.api.IndianData.IndianDataWebService;
+import com.app.coronatracker.ui.api.utils.CTError;
 import com.app.coronatracker.ui.home.model.Dashboard;
 import com.app.coronatracker.ui.home.model.State;
 
@@ -34,6 +37,7 @@ public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<Dashboard> mutableLiveData;
     private MutableLiveData<ArrayList<IndianStateModel>> indianStatesLiveData;
+    private MutableLiveData<CTError> error;
 
     //Repositories
     private GlobalDataRepository globalDataRepository;
@@ -52,6 +56,7 @@ public class HomeViewModel extends ViewModel {
         // Prepare live data
         observerGlobalDataRepository();
         observeIndianStatesRepository();
+        observeForErrors();
     }
 
     private GlobalDataRepository getGlobalDataRepository(){
@@ -79,9 +84,18 @@ public class HomeViewModel extends ViewModel {
                     _indianStateModelModel.setName(state.getName());
                     indianStateModels.add(_indianStateModelModel);
                 }
-                if (indianStateModels.size() > 0){
-                    indianStatesLiveData.setValue(indianStateModels);
-                }
+                indianStatesLiveData.setValue(indianStateModels);
+            }
+        });
+    }
+
+    private void observeForErrors(){
+        indianDataRepository.onError().observeForever(new Observer<CTError>() {
+            @Override
+            public void onChanged(CTError ctError) {
+                error = new MutableLiveData<>();
+                Log.e("API Error-->","error-"+ctError.getErrorMessage()+"code-"+ctError.getErrorCode());
+                error.setValue(ctError);
             }
         });
     }
