@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#D16666</color>
-    <color name="colorSecondary">#2C4251</color>
+    <color name="colorSecondary">#DDDFE1</color>
     <color name="colorPrimaryDark">#63768D</color>
     <color name="colorPrimaryLight">#FFFFFF</color>
     <color name="cardBackground">#C1C1C1</color>
@@ -10,4 +10,7 @@
     <color name="bgBottomNavigation">#80020202</color>
     <color name="selectclr">#4D8BBC</color>
     <color name="clr">#F4F0F0</color>
+    <color name="bgrndClr">#E4EBFA</color>
+    <color name="tabBgrndClr">#F3F4F8</color>
+    <color name="secndBgrndClr">#F9FAFB</color>
 </resources>

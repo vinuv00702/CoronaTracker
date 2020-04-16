@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment  {
 
     private TextView sglobal_text, sglobal_death, sglobal_recovered;
     private View root;
-    private NiceSpinner niceSpinner;
     private HomeViewModel homeViewModel;
     private LottieDialogFragment  lottieDialogFragment ;
     private PieChart pieChart;
@@ -101,8 +100,7 @@ public class HomeFragment extends Fragment  {
     }
 
     private void setUpUI(){
-        niceSpinner = (NiceSpinner) root.findViewById(R.id.state_spinner);
-        spinner =(Spinner)root.findViewById(R.id.state_spinner2);
+        spinner =(Spinner)root.findViewById(R.id.state_spinner);
         pieChart = (PieChart)root.findViewById(R.id.chart);
         sglobal_text = (TextView)root.findViewById(R.id.global_text);
         sglobal_death = (TextView)root.findViewById(R.id.global_death);
@@ -158,7 +156,7 @@ public class HomeFragment extends Fragment  {
         ArrayAdapter adapter = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,dataSet);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        niceSpinner.attachDataSource(dataSet);
+        spinner.setPrompt("Select State");
     }
 
 
