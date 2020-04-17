@@ -78,7 +78,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void progressDialogDismiss(){
-        Toast.makeText(getContext(),"Loaded",Toast.LENGTH_SHORT).show();
+
         lottieDialogFragment.dismiss();
 
     }

@@ -59,16 +59,16 @@ public class HomeFragment extends Fragment  {
     }
 
     private void setPieChart() {
-        pieChart.setUsePercentValues(true);
+        pieChart.setUsePercentValues(false);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5,10,5,5);
 
         pieChart.setDragDecelerationFrictionCoef(0.99f);
 
         pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.GRAY);
-        pieChart.setHoleRadius(30f);
-        pieChart.setTransparentCircleRadius(40f);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setHoleRadius(70f);
+        pieChart.setTransparentCircleRadius(75f);
 
         //chartData();
     }
@@ -79,10 +79,10 @@ public class HomeFragment extends Fragment  {
         PieDataSet dataSet = new PieDataSet(chartData,"Corona Live Data");
         dataSet.setSliceSpace(2f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         PieData pieData = new PieData((dataSet));
-        pieData.setValueTextSize(10f);
+        pieData.setValueTextSize(20);
         pieData.setValueTextColor(Color.BLACK);
 
         pieChart.setData(pieData);
@@ -156,6 +156,7 @@ public class HomeFragment extends Fragment  {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e(" mainAction", "  selected state - "+ indianStateModels.get(i).getName());
                 populateChart(preparePieChartEntry(i,indianStateModels));
+
             }
 
             @Override

@@ -13,4 +13,6 @@
     <color name="bgrndClr">#E4EBFA</color>
     <color name="tabBgrndClr">#F3F4F8</color>
     <color name="secndBgrndClr">#F9FAFB</color>
+    <color name="btmNavIcnBgnd">#04149C</color>
+    <color name="btmNavIcnBgnd2">#1E4AF6</color>
 </resources>
