@@ -24,6 +24,11 @@ public class HomeViewModel extends ViewModel {
 
     public class IndianStateModel {
         private String name;
+        private int id = 0;
+        private int death = 0;
+        private int recovered = 0;
+        private int active = 0;
+        private int confirmed = 0;
 
         public String getName() {
             return name;
@@ -31,6 +36,59 @@ public class HomeViewModel extends ViewModel {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getDeath() {
+            return death;
+        }
+
+        public void setDeath(String death) {
+            if (death == null){
+                this.death = 0;
+            }else{
+                this.death = Integer.parseInt(death.trim());
+            }
+
+        }
+
+        public int getRecovered() {
+            return recovered;
+        }
+
+        public void setRecovered(String recovered) {
+            if (recovered == null){
+                this.recovered = 0;
+            }else{
+                this.recovered = Integer.parseInt(recovered.trim());
+            }
+        }
+
+        public int getActive() {
+            return active;
+        }
+
+        public void setActive(int active) {
+            this.active = active;
+        }
+
+        public int getConfirmed() {
+            return confirmed;
+        }
+
+        public void setConfirmed(String confirmed) {
+            if (confirmed == null){
+                this.confirmed = 0;
+            }else{
+                this.confirmed = Integer.parseInt(confirmed.trim());
+            }
         }
     }
 
@@ -82,6 +140,10 @@ public class HomeViewModel extends ViewModel {
                     // Extract states name from liveData
                     IndianStateModel _indianStateModelModel = new IndianStateModel();
                     _indianStateModelModel.setName(state.getName());
+                    _indianStateModelModel.setDeath(state.getDeaths());
+                    //_indianStateModelModel.setActive(state.getActive());
+                    _indianStateModelModel.setRecovered(state.getRecovered());
+                    _indianStateModelModel.setConfirmed(state.getConfirmed());
                     indianStateModels.add(_indianStateModelModel);
                 }
                 indianStatesLiveData.setValue(indianStateModels);

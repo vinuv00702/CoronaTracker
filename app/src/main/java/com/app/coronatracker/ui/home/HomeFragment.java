@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class HomeFragment extends Fragment  {
     private HomeViewModel homeViewModel;
     private LottieDialogFragment  lottieDialogFragment ;
     private PieChart pieChart;
-    Spinner spinner;
+    private Spinner spinner;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,20 +70,13 @@ public class HomeFragment extends Fragment  {
         pieChart.setHoleRadius(30f);
         pieChart.setTransparentCircleRadius(40f);
 
-        chartData();
+        //chartData();
     }
 
-    private void chartData() {
-        ArrayList<PieEntry> yValues = new ArrayList<>();
-
-        yValues.add(new PieEntry(2011978,"Cases"));
-        yValues.add(new PieEntry(489626,"Recovered"));
-        yValues.add(new PieEntry(127492,"Deaths"));
-        yValues.add(new PieEntry(51571,"Critical"));
-
+    private void chartData( ArrayList<PieEntry> chartData) {
         pieChart.animateY(1000, Easing.EaseInOutQuad);
 
-        PieDataSet dataSet = new PieDataSet(yValues,"Corona Live Data");
+        PieDataSet dataSet = new PieDataSet(chartData,"Corona Live Data");
         dataSet.setSliceSpace(2f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -157,6 +151,30 @@ public class HomeFragment extends Fragment  {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setPrompt("Select State");
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.e(" mainAction", "  selected state - "+ indianStateModels.get(i).getName());
+                populateChart(preparePieChartEntry(i,indianStateModels));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private ArrayList<PieEntry> preparePieChartEntry(int i, ArrayList<HomeViewModel.IndianStateModel> indianStateModels){
+        ArrayList<PieEntry> yValues = new ArrayList<>();
+        yValues.add(new PieEntry(indianStateModels.get(i).getRecovered(),"Recovered"));
+        yValues.add(new PieEntry(indianStateModels.get(i).getDeath(),"Deaths"));
+        yValues.add(new PieEntry(indianStateModels.get(i).getConfirmed(),"Confirmed"));
+        return  yValues;
+    }
+
+    private void populateChart(ArrayList<PieEntry> chartData){
+        chartData(chartData);
     }
 
 
