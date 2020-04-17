@@ -64,7 +64,6 @@ public class HomeFragment extends Fragment  {
         pieChart.setExtraOffsets(5,10,5,5);
 
         pieChart.setDragDecelerationFrictionCoef(0.99f);
-
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setHoleRadius(70f);
