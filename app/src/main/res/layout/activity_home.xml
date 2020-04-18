@@ -36,7 +36,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:paddingTop="3dp"
         app:itemIconTint="@color/btmNavIcnBgnd"
-        app:itemTextColor="@color/btmNavIcnBgnd2"
+        app:itemTextColor="@color/btmNavIcnBgnd"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

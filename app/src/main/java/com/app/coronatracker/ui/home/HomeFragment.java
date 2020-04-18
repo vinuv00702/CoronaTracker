@@ -25,6 +25,7 @@ import com.app.coronatracker.ui.home.model.Dashboard;
 import com.app.coronatracker.ui.home.viewModel.HomeViewModel;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -32,10 +33,13 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.angmarch.views.NiceSpinner;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment  {
 
@@ -45,12 +49,14 @@ public class HomeFragment extends Fragment  {
     private LottieDialogFragment  lottieDialogFragment ;
     private PieChart pieChart;
     private Spinner spinner;
+    private TextView date;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         setUpUI();
+        setDate();
         lottieDialogFragment = new LottieDialogFragment().newInstance();
         prepareViewModel();
         observeViewModel();
@@ -58,12 +64,31 @@ public class HomeFragment extends Fragment  {
         return root;
     }
 
+    private void setDate() {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd, MMM yyyy");
+        String currentDate = simpleDateFormat.format(new Date());
+        date.setText(currentDate);
+    }
+
     private void setPieChart() {
+
+        Legend l = pieChart.getLegend();
+        l.setForm(Legend.LegendForm.CIRCLE);
+        l.setFormSize(20);
+        l.setFormToTextSpace(10);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+
         pieChart.setUsePercentValues(false);
         pieChart.getDescription().setEnabled(false);
+        pieChart.setDrawSliceText(false);
         pieChart.setExtraOffsets(5,10,5,5);
 
         pieChart.setDragDecelerationFrictionCoef(0.99f);
+
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setHoleRadius(70f);
@@ -76,8 +101,9 @@ public class HomeFragment extends Fragment  {
         pieChart.animateY(1000, Easing.EaseInOutQuad);
 
         PieDataSet dataSet = new PieDataSet(chartData,"Corona Live Data");
-        dataSet.setSliceSpace(2f);
-        dataSet.setSelectionShift(5f);
+        dataSet.setSliceSpace(3);
+        dataSet.setSelectionShift(10);
+        dataSet.setHighlightEnabled(true);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         PieData pieData = new PieData((dataSet));
@@ -93,6 +119,7 @@ public class HomeFragment extends Fragment  {
     }
 
     private void setUpUI(){
+        date = (TextView)root.findViewById(R.id.text_date);
         spinner =(Spinner)root.findViewById(R.id.state_spinner);
         pieChart = (PieChart)root.findViewById(R.id.chart);
         sglobal_text = (TextView)root.findViewById(R.id.global_text);
