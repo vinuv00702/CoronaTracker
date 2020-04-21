@@ -2,11 +2,14 @@ package com.app.coronatracker.ui.home;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -41,15 +44,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-public class HomeFragment extends Fragment  {
+public class HomeFragment extends Fragment {
 
-    private TextView sglobal_text, sglobal_death, sglobal_recovered;
+    private TextView sglobal_text, sglobal_death, sglobal_recovered,
+            slocal_recvrd_text, slocal_death_text, slocal_cnfd_text, slocal_actv_text;
     private View root;
     private HomeViewModel homeViewModel;
     private LottieDialogFragment  lottieDialogFragment ;
     private PieChart pieChart;
     private Spinner spinner;
     private TextView date;
+    private Animation animation;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -75,7 +80,7 @@ public class HomeFragment extends Fragment  {
 
         Legend l = pieChart.getLegend();
         l.setForm(Legend.LegendForm.CIRCLE);
-        l.setFormSize(20);
+        l.setFormSize(15);
         l.setFormToTextSpace(10);
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
@@ -91,8 +96,8 @@ public class HomeFragment extends Fragment  {
 
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(Color.WHITE);
-        pieChart.setHoleRadius(70f);
-        pieChart.setTransparentCircleRadius(75f);
+        pieChart.setHoleRadius(50f);
+        pieChart.setTransparentCircleRadius(60f);
 
         //chartData();
     }
@@ -108,7 +113,8 @@ public class HomeFragment extends Fragment  {
 
         PieData pieData = new PieData((dataSet));
         pieData.setValueTextSize(20);
-        pieData.setValueTextColor(Color.BLACK);
+        pieData.setValueTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+        pieData.setValueTextColor(Color.GRAY);
 
         pieChart.setData(pieData);
     }
@@ -125,6 +131,12 @@ public class HomeFragment extends Fragment  {
         sglobal_text = (TextView)root.findViewById(R.id.global_text);
         sglobal_death = (TextView)root.findViewById(R.id.global_death);
         sglobal_recovered = (TextView)root.findViewById(R.id.global_recovered);
+        slocal_recvrd_text = (TextView)root.findViewById(R.id.local_recvrd_text);
+        slocal_death_text = (TextView)root.findViewById(R.id.local_death_text);
+        slocal_cnfd_text = (TextView)root.findViewById(R.id.local_cnfd_text);
+        slocal_actv_text = (TextView)root.findViewById(R.id.local_actv_text);
+        animation = AnimationUtils.loadAnimation(getContext(),R.anim.text_anim);
+
     }
 
 
@@ -147,7 +159,7 @@ public class HomeFragment extends Fragment  {
             @Override
             public void onChanged(@Nullable Dashboard s) {
 
-                progressDialogDismiss();
+//                progressDialogDismiss();
                 Log.e(" mainAction", "  cases - "+ s.getCases());
                 sglobal_text.setText(s.getCases());
                 Log.e(" mainAction", "  death - "+ s.getDeaths());
@@ -163,6 +175,8 @@ public class HomeFragment extends Fragment  {
             @Override
             public void onChanged(ArrayList<HomeViewModel.IndianStateModel> indianStateModels) {
                 populatePicker(indianStateModels);
+
+
             }
         });
     }
@@ -180,8 +194,10 @@ public class HomeFragment extends Fragment  {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                progressDialogDismiss();
                 Log.e(" mainAction", "  selected state - "+ indianStateModels.get(i).getName());
                 populateChart(preparePieChartEntry(i,indianStateModels));
+                setCardView(i,indianStateModels);
 
             }
 
@@ -190,6 +206,22 @@ public class HomeFragment extends Fragment  {
 
             }
         });
+    }
+
+    private void setCardView(int i, ArrayList<HomeViewModel.IndianStateModel> indianStateModels) {
+
+        setAnimation();
+        slocal_recvrd_text.setText(Integer.toString(indianStateModels.get(i).getRecovered()));
+        slocal_death_text.setText(Integer.toString(indianStateModels.get(i).getDeath()));
+        slocal_cnfd_text.setText(Integer.toString(indianStateModels.get(i).getConfirmed()));
+        slocal_actv_text.setText(Integer.toString(indianStateModels.get(i).getActive()));
+    }
+
+    private void setAnimation() {
+        slocal_recvrd_text.startAnimation(animation);
+        slocal_death_text.startAnimation(animation);
+        slocal_cnfd_text.startAnimation(animation);
+        slocal_actv_text.startAnimation(animation);
     }
 
     private ArrayList<PieEntry> preparePieChartEntry(int i, ArrayList<HomeViewModel.IndianStateModel> indianStateModels){
@@ -203,6 +235,5 @@ public class HomeFragment extends Fragment  {
     private void populateChart(ArrayList<PieEntry> chartData){
         chartData(chartData);
     }
-
 
 }
