@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1DEDE"
+    android:background="@color/colorPrimaryLight"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     tools:context=".ui.home.HomeFragment">
@@ -101,7 +101,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/cardBackground"
+                app:cardBackgroundColor="@color/colorPrimaryLight"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 app:layout_constraintDimensionRatio="1:1"
@@ -112,7 +112,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_bg">
 
                     <TextView
                         android:id="@+id/textView6"
@@ -144,9 +145,8 @@
                         android:fontFamily="@font/quicksand"
 
                         android:textAlignment="textStart"
-                        android:textColor="@color/clr"
+                        android:textColor="@color/ic_launcher_background"
                         android:textSize="40dp"
-                        android:textStyle="bold"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -163,7 +163,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/cardBackground"
+                app:cardBackgroundColor="@color/colorPrimaryLight"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 app:layout_constraintDimensionRatio="1:1"
@@ -173,7 +173,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_bg">
 
                     <TextView
                         android:id="@+id/textView7"
@@ -205,9 +206,8 @@
                         android:fontFamily="@font/quicksand"
 
                         android:textAlignment="textStart"
-                        android:textColor="@color/clr"
+                        android:textColor="@color/ic_launcher_background"
                         android:textSize="40dp"
-                        android:textStyle="bold"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -225,7 +225,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/cardBackground"
+                app:cardBackgroundColor="@color/colorPrimaryLight"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 app:layout_constraintDimensionRatio="1:1"
@@ -236,7 +236,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_bg">
 
                     <TextView
                         android:id="@+id/textView8"
@@ -268,9 +269,8 @@
                         android:fontFamily="@font/quicksand"
 
                         android:textAlignment="textStart"
-                        android:textColor="@color/clr"
+                        android:textColor="@color/ic_launcher_background"
                         android:textSize="40dp"
-                        android:textStyle="bold"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -288,7 +288,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/cardBackground"
+                app:cardBackgroundColor="@color/colorPrimaryLight"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 app:layout_constraintDimensionRatio="1:1"
@@ -298,7 +298,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_bg">
 
                     <TextView
                         android:id="@+id/textView9"
@@ -330,9 +331,8 @@
                         android:fontFamily="@font/quicksand"
 
                         android:textAlignment="textStart"
-                        android:textColor="@color/clr"
+                        android:textColor="@color/ic_launcher_background"
                         android:textSize="40dp"
-                        android:textStyle="bold"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -364,7 +364,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/cardBackground"
+                app:cardBackgroundColor="@color/colorPrimaryLight"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -373,7 +373,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_bg">
 
                     <TextView
                         android:id="@+id/textView5"
@@ -383,6 +384,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:text="Cases"
+                        android:fontFamily="@font/quicksand"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="25dp"
                         android:textStyle="bold"
@@ -404,7 +406,9 @@
                         android:layout_marginBottom="16dp"
                         android:text="0000000"
                         android:textAlignment="textStart"
-                        android:textColor="@color/clr"
+                        android:textStyle="normal"
+                        android:fontFamily="@font/quicksand"
+                        android:textColor="@color/ic_launcher_background"
                         android:textSize="50dp"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -423,7 +427,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:cardBackgroundColor="@color/cardBackground"
+                app:cardBackgroundColor="@color/colorPrimaryLight"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -431,7 +435,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_bg">
 
                     <TextView
                         android:id="@+id/textView3"
@@ -441,6 +446,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
                         android:text="Recovered"
+                        android:fontFamily="@font/quicksand"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="25dp"
                         android:textStyle="bold"
@@ -458,7 +464,8 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="8dp"
                         android:text="0000000"
-                        android:textColor="@color/clr"
+                        android:fontFamily="@font/quicksand"
+                        android:textColor="@color/ic_launcher_background"
                         android:textSize="50dp"
                         app:layout_constraintBottom_toTopOf="@+id/textView4"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -475,6 +482,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="8dp"
                         android:text="Death"
+                        android:fontFamily="@font/quicksand"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="25dp"
                         android:textStyle="bold"
@@ -493,7 +501,8 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="16dp"
                         android:text="0000000"
-                        android:textColor="@color/clr"
+                        android:fontFamily="@font/quicksand"
+                        android:textColor="@color/ic_launcher_background"
                         android:textSize="50dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -4,7 +4,7 @@
     <color name="colorSecondary">#DDDFE1</color>
     <color name="colorPrimaryDark">#63768D</color>
     <color name="colorPrimaryLight">#FFFFFF</color>
-    <color name="cardBackground">#C1C1C1</color>
+    <color name="cardBackground">@color/bgrndClr</color>
     <color name="colorDrySkyBlue">#C1C1C1</color>
     <color name="colorAccent">#D81B60</color>
     <color name="bgBottomNavigation">#80020202</color>

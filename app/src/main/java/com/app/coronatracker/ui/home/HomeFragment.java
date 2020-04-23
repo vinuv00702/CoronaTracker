@@ -32,6 +32,7 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.angmarch.views.NiceSpinner;
@@ -78,16 +79,19 @@ public class HomeFragment extends Fragment {
 
     private void setPieChart() {
 
-        Legend l = pieChart.getLegend();
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setFormSize(15);
-        l.setFormToTextSpace(10);
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
+//        Legend l = pieChart.getLegend();
+//        l.setForm(Legend.LegendForm.CIRCLE);
+//        l.setFormSize(20);
+//        l.setTextSize(13);
+//
+//        l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+//        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+//        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+//        l.setDrawInside(false);
 
-        pieChart.setUsePercentValues(false);
+        pieChart.getLegend().setEnabled(false);
+//        pieChart.setUsePercentValues(true);
+
         pieChart.getDescription().setEnabled(false);
         pieChart.setDrawSliceText(false);
         pieChart.setExtraOffsets(5,10,5,5);
@@ -113,8 +117,10 @@ public class HomeFragment extends Fragment {
 
         PieData pieData = new PieData((dataSet));
         pieData.setValueTextSize(20);
+        pieData.setValueFormatter(new PercentFormatter());
+            pieChart.setUsePercentValues(true);
         pieData.setValueTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-        pieData.setValueTextColor(Color.GRAY);
+        pieData.setValueTextColor(Color.BLACK);
 
         pieChart.setData(pieData);
     }
