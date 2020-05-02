@@ -3,24 +3,13 @@ package com.app.coronatracker.ui.home.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class State {
-
-
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-
-    @SerializedName("value")
-    @Expose
-    private Integer value;
 
     @SerializedName("active")
     @Expose
     private Integer active;
-
-    @SerializedName("name")
-    @Expose
-    private String name;
 
     @SerializedName("confirmed")
     @Expose
@@ -34,22 +23,13 @@ public class State {
     @Expose
     private String deaths;
 
+    @SerializedName("state")
+    @Expose
+    private String state;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
+    @SerializedName("district")
+    @Expose
+    private ArrayList<District> district;
 
     public Integer getActive() {
         return active;
@@ -57,14 +37,6 @@ public class State {
 
     public void setActive(Integer active) {
         this.active = active;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getConfirmed() {
@@ -89,5 +61,21 @@ public class State {
 
     public void setDeaths(String deaths) {
         this.deaths = deaths;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public ArrayList<District> getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(ArrayList<District> district) {
+        this.district = district;
     }
 }

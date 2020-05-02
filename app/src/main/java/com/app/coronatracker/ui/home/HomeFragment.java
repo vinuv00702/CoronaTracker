@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
 //        l.setDrawInside(false);
 
         pieChart.getLegend().setEnabled(false);
-//        pieChart.setUsePercentValues(true);
+        pieChart.setUsePercentValues(true);
 
         pieChart.getDescription().setEnabled(false);
         pieChart.setDrawSliceText(false);
@@ -113,12 +113,23 @@ public class HomeFragment extends Fragment {
         dataSet.setSliceSpace(3);
         dataSet.setSelectionShift(10);
         dataSet.setHighlightEnabled(true);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        //add colors to dataSet
+        ArrayList<Integer> colors = new ArrayList<>();
+
+        colors.add(Color.CYAN);
+        colors.add(Color.RED);
+        colors.add(Color.BLUE);
+
+        dataSet.setColors(colors);
+
+
 
         PieData pieData = new PieData((dataSet));
         pieData.setValueTextSize(20);
-        pieData.setValueFormatter(new PercentFormatter());
-            pieChart.setUsePercentValues(true);
+        pieData.setValueFormatter(new PercentFormatter(pieChart));
+
         pieData.setValueTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
         pieData.setValueTextColor(Color.BLACK);
 
@@ -155,7 +166,7 @@ public class HomeFragment extends Fragment {
     //Observe changes on viewmodel
     private void observeViewModel(){
         homeViewModel.init();
-        showProgressDialog();
+//        showProgressDialog();
         observeGlobalData();
         observeIndianStates();
     }
@@ -166,6 +177,7 @@ public class HomeFragment extends Fragment {
             public void onChanged(@Nullable Dashboard s) {
 
 //                progressDialogDismiss();
+                setAnimation();
                 Log.e(" mainAction", "  cases - "+ s.getCases());
                 sglobal_text.setText(s.getCases());
                 Log.e(" mainAction", "  death - "+ s.getDeaths());
@@ -190,8 +202,8 @@ public class HomeFragment extends Fragment {
     private void populatePicker(ArrayList<HomeViewModel.IndianStateModel> indianStateModels){
         List<String> dataSet = new LinkedList<>();
         for (HomeViewModel.IndianStateModel st : indianStateModels){
-            Log.e(" mainAction", "  states - "+ st.getName());
-            dataSet.add(st.getName());
+            Log.e(" mainAction", "  states - "+ st.getState());
+            dataSet.add(st.getState());
         }
         ArrayAdapter adapter = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,dataSet);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -200,8 +212,8 @@ public class HomeFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                progressDialogDismiss();
-                Log.e(" mainAction", "  selected state - "+ indianStateModels.get(i).getName());
+//                progressDialogDismiss();
+                Log.e(" mainAction", "  selected state - "+ indianStateModels.get(i).getState());
                 populateChart(preparePieChartEntry(i,indianStateModels));
                 setCardView(i,indianStateModels);
 
@@ -228,6 +240,10 @@ public class HomeFragment extends Fragment {
         slocal_death_text.startAnimation(animation);
         slocal_cnfd_text.startAnimation(animation);
         slocal_actv_text.startAnimation(animation);
+
+        sglobal_text.startAnimation(animation);
+        sglobal_death.startAnimation(animation);
+        sglobal_recovered.startAnimation(animation);
     }
 
     private ArrayList<PieEntry> preparePieChartEntry(int i, ArrayList<HomeViewModel.IndianStateModel> indianStateModels){

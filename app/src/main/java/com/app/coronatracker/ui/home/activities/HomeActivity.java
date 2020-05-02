@@ -1,6 +1,7 @@
 package com.app.coronatracker.ui.home.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.viewpager.widget.ViewPager;
 
 import com.app.coronatracker.R;
 import com.app.coronatracker.ui.dashboard.DashboardFragment;
@@ -18,12 +20,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
+    BottomNavigationView navView;
+    ViewPager viewPager;
+    MenuItem prevMenuItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        initiAlisation();
         loadFragment (new HomeFragment());
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -33,6 +38,14 @@ public class HomeActivity extends AppCompatActivity {
 //        NavController navController = Navigation.findNavController(this, R.id.mobile_navigation);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 //        NavigationUI.setupWithNavController(navView, navController);
+    }
+
+
+
+    private void initiAlisation() {
+        navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

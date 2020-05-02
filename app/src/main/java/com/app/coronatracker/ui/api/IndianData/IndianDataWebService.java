@@ -23,32 +23,32 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class IndianDataWebService implements IndianDataWebInterface {
 
     public class Result{
-        @SerializedName("status")
+        @SerializedName("key_values")
         @Expose
-        private String status;
+        private String key_values;
 
-        @SerializedName("statusCode")
+        @SerializedName("total_values")
         @Expose
-        private String statusCode;
+        private String total_values;
 
-        @SerializedName("response")
+        @SerializedName("state_wise")
         @Expose
         private ArrayList<State> states;
 
-        public String getStatus() {
-            return status;
+        public String getKey_values() {
+            return key_values;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setKey_values(String key_values) {
+            this.key_values = key_values;
         }
 
-        public String getStatusCode() {
-            return statusCode;
+        public String getTotal_values() {
+            return total_values;
         }
 
-        public void setStatusCode(String statusCode) {
-            this.statusCode = statusCode;
+        public void setTotal_values(String total_values) {
+            this.total_values = total_values;
         }
 
         public ArrayList<State> getStates() {

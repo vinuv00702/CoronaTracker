@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,11 +15,14 @@ import com.app.coronatracker.R;
 import com.app.coronatracker.ui.dashboard.model.Country;
 
 import java.util.ArrayList;
+import java.util.List;
 
-class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements Filterable {
 
     private Context context;
     ArrayList<Country> countryArrayList;
+    private List<Country> countryList;
+    private List<Country> conuntryListFiltered;
 
     public CustomAdapter(Context context, ArrayList<Country> countryArrayList){
         this.context = context;
@@ -49,6 +54,41 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return countryArrayList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    conuntryListFiltered = countryList;
+                } else {
+                    List<Country> filteredList = new ArrayList<>();
+                    for (Country row : countryList) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getCountry().toLowerCase().contains(charString.toLowerCase())){
+                            filteredList.add(row);
+                        }
+                    }
+
+                    conuntryListFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = conuntryListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                conuntryListFiltered = (ArrayList<Country>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

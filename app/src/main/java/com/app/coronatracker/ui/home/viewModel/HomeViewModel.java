@@ -23,27 +23,18 @@ public class HomeViewModel extends ViewModel {
 
 
     public class IndianStateModel {
-        private String name;
-        private int id = 0;
+        private String state;
         private int death = 0;
         private int recovered = 0;
         private int active = 0;
         private int confirmed = 0;
 
-        public String getName() {
-            return name;
+        public String getState() {
+            return state;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
+        public void setState(String state) {
+            this.state = state;
         }
 
         public int getDeath() {
@@ -139,7 +130,7 @@ public class HomeViewModel extends ViewModel {
                 {
                     // Extract states name from liveData
                     IndianStateModel _indianStateModelModel = new IndianStateModel();
-                    _indianStateModelModel.setName(state.getName());
+                    _indianStateModelModel.setState(state.getState());
                     _indianStateModelModel.setDeath(state.getDeaths());
                     //_indianStateModelModel.setActive(state.getActive());
                     _indianStateModelModel.setRecovered(state.getRecovered());
