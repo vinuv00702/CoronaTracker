@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -89,7 +90,7 @@ public class HomeFragment extends Fragment {
 //        l.setOrientation(Legend.LegendOrientation.VERTICAL);
 //        l.setDrawInside(false);
 
-        pieChart.getLegend().setEnabled(false);
+        pieChart.getLegend().setEnabled(true);
         pieChart.setUsePercentValues(true);
 
         pieChart.getDescription().setEnabled(false);
@@ -118,9 +119,9 @@ public class HomeFragment extends Fragment {
         //add colors to dataSet
         ArrayList<Integer> colors = new ArrayList<>();
 
-        colors.add(Color.CYAN);
+        colors.add(ContextCompat.getColor(getContext(),R.color.pieclr));
         colors.add(Color.RED);
-        colors.add(Color.BLUE);
+        colors.add(ContextCompat.getColor(getContext(),R.color.btmNavIcnBgnd2));
 
         dataSet.setColors(colors);
 
@@ -131,7 +132,7 @@ public class HomeFragment extends Fragment {
         pieData.setValueFormatter(new PercentFormatter(pieChart));
 
         pieData.setValueTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-        pieData.setValueTextColor(Color.BLACK);
+        pieData.setValueTextColor(Color.WHITE);
 
         pieChart.setData(pieData);
     }
@@ -166,7 +167,7 @@ public class HomeFragment extends Fragment {
     //Observe changes on viewmodel
     private void observeViewModel(){
         homeViewModel.init();
-//        showProgressDialog();
+        showProgressDialog();
         observeGlobalData();
         observeIndianStates();
     }
@@ -212,7 +213,7 @@ public class HomeFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                progressDialogDismiss();
+                progressDialogDismiss();
                 Log.e(" mainAction", "  selected state - "+ indianStateModels.get(i).getState());
                 populateChart(preparePieChartEntry(i,indianStateModels));
                 setCardView(i,indianStateModels);
