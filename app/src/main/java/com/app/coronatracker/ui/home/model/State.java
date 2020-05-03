@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class State {
 
@@ -29,7 +30,7 @@ public class State {
 
     @SerializedName("district")
     @Expose
-    private ArrayList<District> district;
+    private HashMap<String, District> states = new HashMap<String, District>();;
 
     public Integer getActive() {
         return active;
@@ -71,11 +72,11 @@ public class State {
         this.state = state;
     }
 
-    public ArrayList<District> getDistrict() {
-        return district;
+    public HashMap<String, District> getStates() {
+        return states;
     }
 
-    public void setDistrict(ArrayList<District> district) {
-        this.district = district;
+    public void setStates(HashMap<String, District> states) {
+        this.states = states;
     }
 }
